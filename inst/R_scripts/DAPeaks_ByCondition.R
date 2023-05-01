@@ -1,24 +1,25 @@
 
 args <- commandArgs(trailingOnly=TRUE)
-ATACobj <- args[1]
-annotation.gr <- args[2]
-AssayName <- args[3]
-celltype.query <- args[4]
-conditionA <- args[5]
-conditionB <- args[6]
-cellnum <- args[7]
-peaknum <- args[8]
-MinCellRatio <- args[9]
-random.repeats <- args[10]
-harmony <- args[11]
-outputDir <- args[12]
-savePeakRobj <- args[13]
+ATACobj_path <- args[1]
+AssayName <- args[2]
+celltype.query <- args[3]
+conditionA <- args[4]
+conditionB <- args[5]
+cellnum <- args[6]
+peaknum <- args[7]
+MinCellRatio <- args[8]
+random.repeats <- args[9]
+harmony <- args[10]
+outputDir <- args[11]
+savePeakRobj <- args[12]
+MACS2_path <- args[12]
 
-
-DAPeaksByCondition <- function(ATACobj, annotation.gr, AssayName, celltype.query, conditionA, conditionB , cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj)
+DAPeaksByCondition <- function(ATACobj_path, AssayName, celltype.query, conditionA, conditionB , cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj,MACS2_path)
 {
+  ATACobj=readRDS(ATACobj_path)
   library(Signac)
   library(Seurat)
+  library(GenomicRanges)
   dir.create(outputDir)
   Seurat::DefaultAssay(ATACobj) <- AssayName
   ###### set the random subsampling name #####
@@ -74,20 +75,12 @@ macs2.counts.ATACobj.rand <- Signac::FeatureMatrix(
   cells = colnames(ATACobj.rand)
 )
 
-if (file.exists("annotation.gr") == TRUE)
-{
+
 ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
   counts = macs2.counts.ATACobj.rand,
   annotation = annotation.gr
 )
-}
 
-if (file.exists("annotation.gr") == FALSE)
-{
-  ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
-    counts = macs2.counts.ATACobj.rand
-  )
-}
 
 ### run harmony if set harmony = TRUE
 if (harmony == TRUE)
@@ -152,7 +145,7 @@ print(paste0(Sys.time()," Random subsampling V", k ," is done"))
 
    ### create a stats table
    stats.group.name <- c("celltype","condition.comparison","sig.peaks","tested.peaks","sig.peak.pct")
-   peaks.stats <- data.frame(matrix(NA, nrow = random.repeats, ncol = length(stats.group.name)))
+   peaks.stats <- data.frame(matrix(0, nrow = random.repeats, ncol = length(stats.group.name)))
    colnames(peaks.stats) <- stats.group.name
 
    for (i in 1:random.repeats)
@@ -184,5 +177,5 @@ if (conditionA.total < cellnum | conditionB.total < cellnum)
 
 }
 
-DAPeaksByCondition(ATACobj, annotation.gr, AssayName, celltype.query, conditionA, conditionB , cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj)
+DAPeaksByCondition(ATACobj_path, AssayName, celltype.query, conditionA, conditionB, cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj,MACS2_path)
 
