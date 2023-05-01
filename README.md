@@ -37,6 +37,7 @@ The *scisorATAC* package allows you to down-sample reads and exons from long-rea
   * tidyr
   * GenomicRanges
   * Rsamtools
+  * Macs2
 
 ### Documentation Cheat Sheet
 Each function's proper usage and inputs can be viewed interactively by putting a "?" in front of the function name like so:
