@@ -1,28 +1,31 @@
 args <- commandArgs(trailingOnly=TRUE)
-ATACobj <- args[1]
-annotation.gr <- args[2]
-AssayName <- args[3]
-condition.query <- args[4]
-celltypeA <- args[5]
-celltypeB <- args[6]
-cellnum <- args[7]
-peaknum <- args[8]
-MinCellRatio <- args[9]
-random.repeats <- args[10]
-harmony <- args[11]
-outputDir <- args[12]
-savePeakRobj <- args[13]
+ATACobj_path <- args[1]
+AssayName <- args[2]
+condition.query <- args[3]
+celltypeA <- args[4]
+celltypeB <- args[5]
+cellnum <- args[6]
+peaknum <- args[7]
+MinCellRatio <- args[8]
+random.repeats <- args[9]
+harmony <- args[10]
+outputDir <- args[11]
+savePeakRobj <- args[12]
+MACS2_path <- args[13]
 
-DAPeaksByCelltype <- function(ATACobj, annotation.gr, AssayName, condition.query, celltypeA, celltypeB, cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj)
+DAPeaksByCelltype <- function(ATACobj_path,AssayName,condition.query, celltypeA, celltypeB, cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj, MACS2_path)
 {
+  ATACobj=readRDS(ATACobj_path)
+
   library(Signac)
   library(Seurat)
+  library(GenomicRanges)
   dir.create(outputDir)
   ###### set the random subsampling name #####
   rand.times <- c(1:random.repeats)
   rand.version <- paste0(c("rand.V"),rand.times)
 
-  Seurat::DefaultAssay(ATACobj) <- AssayName
+  DefaultAssay(ATACobj) <- AssayName
   ##### subset the query condition ########
   ATACobj <- subset(ATACobj, subset = condition == condition.query)
  ######### subset the Robj of specific celltype A and celltype B for comparison ##########
@@ -42,8 +45,8 @@ rowname.listB <- as.data.frame(rownames(ATACobj.B@meta.data))
 rm(ATACobj.A,ATACobj.B)
 
 ######if number of celltype A and celltype B exceed the random sampling size cellnum ######
- if (celltypeA.total>cellnum & celltypeB.total>cellnum)
- {
+ #if (celltypeA.total>cellnum & celltypeB.total>cellnum)
+ #{
    for (k in 1:random.repeats)
    {
  ######## get random subsampled cells with a specified number cellnum ########
@@ -60,7 +63,8 @@ Seurat::DefaultAssay(ATACobj.rand) <- AssayName
 #### calling peaks with MACS2
 macs.peaks.rand <- Signac::CallPeaks(
   object = ATACobj.rand,
-  group.by = "celltype"
+  group.by = "celltype",
+	macs2.path = MACS2_path
 )
 
 macs.peaks.rand.chr <- GenomeInfoDb::keepStandardChromosomes(macs.peaks.rand, pruning.mode = "coarse")
@@ -73,21 +77,9 @@ macs2.counts.ATACobj.rand <- Signac::FeatureMatrix(
 )
 
 #### if annotation file is supplied ########
-if (file.exists("annotation.gr") == TRUE)
-{
-  ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
-    counts = macs2.counts.ATACobj.rand,
-    annotation = annotation.gr
-  )
-}
-
-#### if annotation file is NULL ########
-if (file.exists("annotation.gr") == FALSE)
-{
-  ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
+ ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
     counts = macs2.counts.ATACobj.rand
   )
-}
 
 ### run harmony if harmony = TRUE
 if (harmony == TRUE)
@@ -155,7 +147,7 @@ print("Starting stats of tested peaks")
 
 ### create a stats table
 stats.group.name <- c("condition","celltype.comparison","sig.peaks","tested.peaks","sig.peak.pct")
-peaks.stats <- data.frame(matrix(NA, nrow = random.repeats, ncol = length(stats.group.name)))
+peaks.stats <- data.frame(matrix(0, nrow = random.repeats, ncol = length(stats.group.name)))
 colnames(peaks.stats) <- stats.group.name
 
 for (i in 1:random.repeats)
@@ -177,17 +169,17 @@ for (i in 1:random.repeats)
 ##### print out the stats
 write.table(peaks.stats, file = paste0(outputDir,"/","Sig.Peak.Stats_",random.repeats,"random.subsamplings_",condition.query,"_",celltypeA,".VS.",celltypeB,".txt"),sep = "\t"  ,col.names = TRUE, row.names = FALSE, quote = FALSE)
 
-}
+#}
 
 ####### if given subsampling size is larger than the cell number of either one of the query celltypes
-if (celltypeA.total < cellnum | celltypeB.total < cellnum)
-{
-  print("subsampling size is larger than the total cell number")
-}
+#if (celltypeA.total < cellnum | celltypeB.total < cellnum)
+#{
+#  print("subsampling size is larger than the total cell number")
+#}
 
 
 }
 
-DAPeaksByCelltype(ATACobj, annotation.gr, AssayName, condition.query, celltypeA, celltypeB, cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj)
+DAPeaksByCelltype(ATACobj_path, AssayName, condition.query, celltypeA, celltypeB, cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj, MACS2_path)
 
 
