@@ -3,7 +3,7 @@
 #' @return downloaded example files
 #'
 #' @export
-############ Downsample exons to having x number of reads
+############ 
 
 DownloadRefs <- function() {
   file1 <- system.file("bash", "DownloadReferenceFiles.sh", package = "scisorATAC")
