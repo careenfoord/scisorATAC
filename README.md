@@ -54,6 +54,20 @@ rm(.Random.seed, envir=globalenv())
 ```
 * when inputting function variables, place them in the order specified below.
 
+### Installation
+Package can be installed with devtools
+```{r install devtools, include = TRUE, eval = FALSE}
+devtools::install_github("careenfoord/scisorATAC")
+library(scisorATAC)
+```
+or can be downloaded and built in terminal. Make sure the package name is scisorATAC
+```{r install devtools, include = TRUE, eval = FALSE}
+wget https://github.com/careenfoord/scisorATAC/archive/refs/heads/main.zip
+unzip main.zip
+mv scisorATAC-main/ scisorATAC/
+R CMD build scisorATAC/
+R CMD INSTALL scisorATAC_0.0.0.9000.tar.gz
+```
 
 ### Example Dataset
 Example datasets are available to use by running the command below after installation
@@ -165,8 +179,7 @@ Calling differential accessible peaks by comparing two conditions of one specifi
 
 Required input:
 
-- ATACobj: Object has the chromatin assay created with the fragment files of cellranger-arc or cellranger-atac output
-- annotatinon.gr: A set of GRanges containing annotations for the genome used, default setting is NULL.
+- ATACobj_path: path to .RDS file with the chromatin assay created with the fragment files of cellranger-arc or cellranger-atac output
 - AssayName: The assay name of the chromatin assay, default setting is “ATAC”, which is a required input.
 - celltype.query: The query cell type name. The cell type name should have been assigned to cells of the chromatin assay, and the assignment should be listed as column “celltype” in ATACob@meta.data. This is a required input.
 - conditionA: Condition A for comparison, which is a required input.
@@ -177,22 +190,23 @@ Required input:
 - random.repeats: Random subsampling times
 - outputDir: The path to the output files.
 - savePeakRobj: The peaks called by MACS2 for each subsampling will be stored as assay ‘peaks’. It will be saved as Robj for downstream analysis. The default setting is FALSE
+- MACS2_path: Path to the MACS2 package
 
 
 ```{r conditionATAC, include = TRUE, eval = FALSE}
-DAPeaks_ByCondition(ATACobj = combined, annotatinon.gr = NULL,
+DAPeaks_ByCondition(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",
 AssayName = "ATAC", celltype.query = c("ExN_CUX2_RORB"), conditionA = c(“VIS”),
 conditionB = “PFC”, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, 
 random.repeats = 10, outputDir = PathToOutputFiles, savePeakRobj = FALSE)
 ```
+* Each random.repeat will take approximately 20 minutes to complete. If testing this function we recommend starting with 1 or 2 *
 
 ## Cell Type Specific ATAC Comparison
 Calling differential accessible peaks by comparing two conditions of one specific cell type. 
 
 Required input:
 
-- ATACobj: Object has the chromatin assay created with the fragment files of cellranger-arc or cellranger-atac output
-- annotatinon.gr: A set of GRanges containing annotations for the genome used, default setting is NULL.
+- ATACobj_path: Object has the chromatin assay created with the fragment files of cellranger-arc or cellranger-atac output
 - AssayName: The assay name of the chromatin assay, default setting is “ATAC”, which is a required input.
 - condition.query: The query condition name. The condition name should have been assigned to cells of the chromatin assay, and the assignment should be listed as column “condition” in ATACob@meta.data. This is a required input.
 - celltypeA: celltype A for comparison, which is a required input.
@@ -203,10 +217,10 @@ Required input:
 - random.repeats: Random subsampling times
 - outputDir: The path to the output files.
 - savePeakRobj: The peaks called by MACS2 for each subsampling will be stored as assay ‘peaks’. It will be saved as Robj for downstream analysis. The default setting is FALSE
-
+- MACS2_path: Path to the MACS2 package
 
 ```{r ctATAC, include = TRUE, eval = FALSE}
-DAPeaks_ByCelltype(ATACobj = combined, annotatinon.gr = NULL, AssayName = "ATAC", 
+DAPeaks_ByCelltype(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",  AssayName = "ATAC", 
 condition.query = c("VIS"),  celltypeA = c(“ExN_CUX2_RORB”),  celltypeB = c("ExN_RORB"), 
 cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, 
 outputDir = PathToOutputFiles , savePeakRobj = FALSE)
