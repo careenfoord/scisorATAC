@@ -3,7 +3,7 @@ example.data.path <-args[1]
 outDir <- args[2]
 harmony <- args[3]
 
-CreateExampleATACobj <- function(example.data.path,outDir, harmony = FALSE)
+CreateExampleATACobj <- function(example.data.path,outDir, harmony)
 {
   library(Signac)
   library(Seurat)
