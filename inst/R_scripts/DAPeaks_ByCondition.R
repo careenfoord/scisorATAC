@@ -15,7 +15,7 @@ outputDir <- args[12]
 savePeakRobj <- args[13]
 
 
-DAPeaksByCondition <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", celltype.query, conditionA, conditionB , cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE)
+DAPeaksByCondition <- function(ATACobj, annotation.gr, AssayName, celltype.query, conditionA, conditionB , cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj)
 {
   library(Signac)
   library(Seurat)
