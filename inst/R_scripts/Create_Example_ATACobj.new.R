@@ -13,7 +13,7 @@ dir.create(outDir)
 load(paste0(example.data.path,"/Macaca.mulatta.Mmul.10.104.granges.chr.annotation.NCBI.Robj"))
 
 #### import the peaks.bed file as query features #######
-all.atac.peaks.bed <- read.table(paste0(example.data.path,file = "/combined.7K.cells.ATAC.peaks.bed", sep = "\t", header = T))
+all.atac.peaks.bed <- read.table(paste0(example.data.path,file = "/combined.7K.cells.ATAC.peaks.bed"), sep = "\t", header = T)
 all.atac.peaks.bed <- all.atac.peaks.bed[,1:3]
 colnames(all.atac.peaks.bed) <-  c("chr", "start", "end")
 all.atac.peaks.gr <- GenomicRanges::makeGRangesFromDataFrame(all.atac.peaks.bed)
@@ -119,7 +119,7 @@ if (harmony == TRUE)
 
 
 ### import the cell assignment file #####
-cta <- read.table(paste0(example.data.path,"/barcode2celltype.txt", sep = "\t", header = T))
+cta <- read.table(paste0(example.data.path,"/barcode2celltype.txt"), sep = "\t", header = T)
 
 #### assign the cell type for each cell by barcode  ##########
 combined$barcode <- rownames(combined@meta.data)
