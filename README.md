@@ -154,7 +154,7 @@ Inputs:
 - harmony: Runharmony will be performed if set to be true, default = FALSE
 
 ```{r CreateATACex, include = TRUE, eval = FALSE}
-Create_Example_ATACobj(example.data.path = "path_to_refs", outDir="OutputDir", harmony = FALSE)
+Create_Example_ATACobj(example.data.path = "Refs/", outDir="OutputDir", harmony = FALSE)
 ```
 
 
