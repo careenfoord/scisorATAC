@@ -25,7 +25,7 @@
 #'
 #'
 #' @export
-############ Downsample exons to having x number of reads
+############ 
 
 casesVcontrols <- function(caseList,controlList,chrom_file,numThreads = 10,annotation_path,ci_low = 0.05,ci_high = 0.95,min_reads = 10,zipping_function = "zcat",OL_fraction = 0.8,CellTypeFile, OutputDir="OutputDir") {
   file1 <- system.file("bash", "casesVcontrols.sh", package = "scisorATAC")
