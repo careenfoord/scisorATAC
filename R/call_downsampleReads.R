@@ -10,7 +10,7 @@
 #' @export
 #'
 #'
-############ Downsample exons to having x number of reads
+############ 
 
 downsampleReads <- function(Num_Downsampled_Reads = 10, example=FALSE) {
   file2 <- system.file("R_scripts", "downsampling_reads.R", package = "scisorATAC")
