@@ -7,6 +7,17 @@ CreateExampleATACobj <- function(example.data.path,outDir, harmony)
 {
   library(Signac)
   library(Seurat)
+  
+  library(Rsamtools)
+  setwd(example.data.path)
+  ###### four sample names ########
+  sample.names <- c("M1_PFC","M1_VIS","M2_PFC","M2_VIS")
+  for (i in 1:length(sample.names))
+  {
+  Rsamtools::indexTabix(file = paste0(sample.names[i],c("_atac_fragments.tsv.gz")), format = c("bed"))
+  }
+  
+  setwd("../")
 ### create an output directory #######
 dir.create(outDir)
 ##### load annotation granges file ########
