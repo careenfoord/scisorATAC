@@ -13,7 +13,7 @@ harmony <- args[11]
 outputDir <- args[12]
 savePeakRobj <- args[13]
 
-DAPeaks_ByCelltype <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", condition.query, celltypeA, celltypeB, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE)
+DAPeaksByCelltype <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", condition.query, celltypeA, celltypeB, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE)
 {
   library(Signac)
   library(Seurat)
