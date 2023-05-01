@@ -5,7 +5,7 @@
 #' @return violin plot from output of downsampleExonsAndIterate.R
 #' @export
 
-############ Downsample exons to having x number of reads
+############ 
 
 ViolinPlot <- function() {
   file4 <- system.file("R_scripts", "violinPlot.R", package = "scisorATAC")
