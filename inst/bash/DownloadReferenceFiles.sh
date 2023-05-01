@@ -7,3 +7,9 @@ cd Refs
 curl -L -o out.zip "https://www.dropbox.com/sh/y5ly6bswf4qqrg9/AACWrqJ74AN8RRPLVD9xe38Fa?dl=1"
 
 unzip out.zip
+
+tabix -f -p bed M1_PFC_atac_fragments.tsv.gz
+tabix -f -p bed M2_PFC_atac_fragments.tsv.gz
+tabix -f -p bed M1_VIS_atac_fragments.tsv.gz
+tabix -f -p bed M2_VIS_atac_fragments.tsv.gz
+
