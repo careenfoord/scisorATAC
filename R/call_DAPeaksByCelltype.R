@@ -20,7 +20,7 @@
 #'
 
 DAPeaks_ByCelltype <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", condition.query, celltypeA, celltypeB, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE) {
-  file6 <- system.file("R_scripts", "DAPeaksByCelltype.R", package = "scisorATAC")
+  file6 <- system.file("R_scripts", "DAPeaks_ByCelltype.R", package = "scisorATAC")
   string6 <- paste("Rscript", file6, ATACobj, annotation.gr, AssayName,condition.query,celltypeA,celltypeB,cellnum,peaknum,MinCellRatio,random.repeats,harmony, outputDir,savePeakRobj)
   system(string6)
 }
