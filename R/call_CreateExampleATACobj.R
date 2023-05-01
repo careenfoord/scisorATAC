@@ -9,7 +9,7 @@
 #' @export
 #'
 #'
-############ Downsample exons to having x number of reads
+############ 
 
 
 Create_Example_ATACobj <- function(example.data.path, outDir="OutputDir",harmony = FALSE) {
