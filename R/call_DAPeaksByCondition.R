@@ -19,7 +19,7 @@
 #' @export
 
 DAPeaks_ByCondition <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", celltype.query, conditionA, conditionB , cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE) {
-  file5 <- system.file("R_scripts", "DAPeaksByCondition.R", package = "scisorATAC")
+  file5 <- system.file("R_scripts", "DAPeaks_ByCondition.R", package = "scisorATAC")
   string5 <- paste("Rscript", file5, ATACobj, annotation.gr, AssayName,celltype.query,conditionA,conditionB,cellnum,peaknum,MinCellRatio,random.repeats,harmony, outputDir,savePeakRobj)
   system(string5)
 }
