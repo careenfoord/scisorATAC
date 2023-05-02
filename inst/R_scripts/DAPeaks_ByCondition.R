@@ -12,7 +12,7 @@ random.repeats <- args[9]
 harmony <- args[10]
 outputDir <- args[11]
 savePeakRobj <- args[12]
-MACS2_path <- args[12]
+MACS2_path <- args[13]
 
 DAPeaksByCondition <- function(ATACobj_path, AssayName, celltype.query, conditionA, conditionB , cellnum, peaknum, MinCellRatio, random.repeats, harmony, outputDir, savePeakRobj,MACS2_path)
 {
