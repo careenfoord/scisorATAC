@@ -100,7 +100,7 @@ other flexible inputs:
 
 ```{r casesVcontrols, include = TRUE, eval = FALSE}
 casesVcontrols(caseList = "complete_path_to_caseList", controlList = "complete_path_to_controlList", 
-               chrom_file = "path_to_chromFile",numThreads = 10, 
+               chrom_file = "Refs/all",numThreads = 10, 
                annotation_path = "path_to_anno", 
                ci_low = 0.05, ci_upper = 0.95, min_reads = 10, 
                zipping_function = "zcat", OL_fraction = 0.8, 
