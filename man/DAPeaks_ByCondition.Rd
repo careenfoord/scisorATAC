@@ -44,8 +44,8 @@ DAPeaks_ByCondition(
 \item{savePeakRobj}{The peaks called by MACS2 for each subsampling will be stored as assay ‘peaks’. It will be saved as Robj for downstream analysis, default = FALSE.}
 
 \item{celltype}{the cell type in query.}
+                    
 \item{MACS2_path}{path to macs2}
-}
 }
 \value{
 downsampled ATAC cells
