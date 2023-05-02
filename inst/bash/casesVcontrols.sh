@@ -2,7 +2,7 @@
 
 #local_path=$1
 
-Rscript -e 'cat(system.file("bash", "v1.1a_exonInclusion_CTspecific_case_control.sh", package = "scisorATAC"))' > path_to_casesVcontrols
+Rscript -e 'cat(suppressWarnings(system.file("bash", "v1.1a_exonInclusion_CTspecific_case_control.sh", package = "scisorATAC")))' > path_to_casesVcontrols
 
 casesVcontrols_path=$(<path_to_casesVcontrols)
 
@@ -13,7 +13,7 @@ numThreads=$4
 annotation_path=$5
 
 #find "$(cd ..; pwd)" -name "other-scripts" | awk '{print $1"/"}' > path_to_scripts
-Rscript -e 'cat(system.file("bash", "other-scripts", package = "scisorATAC"))' > path_to_scripts
+Rscript -e 'cat(suppressWarnings(system.file("bash", "other-scripts", package = "scisorATAC")))' > path_to_scripts
 scripts_path=$(<path_to_scripts)
 
 ci_low=$6
