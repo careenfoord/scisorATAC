@@ -5,7 +5,7 @@
 \title{Calling differential accessible peaks by comparing two conditions of one specific cell type ####################}
 \usage{
 DAPeaks_ByCondition(
-  ATACobj,
+  ATACobj_path,
   AssayName = "ATAC",
   celltype.query,
   conditionA,
@@ -21,7 +21,7 @@ DAPeaks_ByCondition(
 )
 }
 \arguments{
-\item{ATACobj}{the path to the RDS file with chromatin assay created.}
+\item{ATACobj_path}{the path to the RDS file with chromatin assay created.}
 
 \item{AssayName}{The assay names of the chromatin assay, default = "ATAC"}
 
