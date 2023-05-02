@@ -149,8 +149,8 @@ table(combined$condition, combined$celltype)
 
 #### save the object ######
 print("save the seurat object in outDir")
-save(combined, file = paste0(outDir,"/combined.7K.ATAC.Robj"))
-
+#save(combined, file = paste0(outDir,"/combined.7K.ATAC.Robj"))
+saveRDS(combined, file = paste0(outDir,"/combined.7K.ATAC.RDS"))
 }
 
 CreateExampleATACobj(example.data.path, outDir, harmony)
