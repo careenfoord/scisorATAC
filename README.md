@@ -60,7 +60,7 @@ Package can be installed with devtools
 devtools::install_github("careenfoord/scisorATAC")
 library(scisorATAC)
 ```
-or can be downloaded and built in terminal. Make sure the package name is scisorATAC
+or can be downloaded and built in bash. Make sure you're in the conda env. and the package name is scisorATAC
 ```{r install devtools, include = TRUE, eval = FALSE}
 wget https://github.com/careenfoord/scisorATAC/archive/refs/heads/main.zip
 unzip main.zip
@@ -92,7 +92,7 @@ other flexible inputs:
 
 - numThreads: number of threads to be used; default = 10
 - ci_low	min percent spliced inclusion considered; default = 0.05
-- ci_upper:	max percent spliced inclusion considered; default = 0.95
+- ci_high:	max percent spliced inclusion considered; default = 0.95
 - min_reads:	minimum number of reads for sum of 2 allInfos for a given exon. default = 10
 - OL_fraction: the fraction of the reads for a given position must be either inclusion or exclusion; default = 0.8
 - zipping_function: command for unzipping files; default Linux as "zcat".
@@ -102,11 +102,13 @@ other flexible inputs:
 casesVcontrols(caseList = "complete_path_to_caseList", controlList = "complete_path_to_controlList", 
                chrom_file = "Refs/all.chroms.20.X ",numThreads = 24, 
                annotation_path = "Refs/Macaca_mulatta.Mmul_10.101_gencodeFormat.gtf.gz", 
-               ci_low = 0.05, ci_upper = 0.95, min_reads = 10, 
+               ci_low = 0.05, ci_high = 0.95, min_reads = 10, 
                zipping_function = "zcat", OL_fraction = 0.8, 
                CellTypeFile = "Refs/CellTypeFile", OutputDir="OutputDir")
 ```
+A note: 
 
+* If this code stops for any reason mid-running, delete the outputDir and start again 
 
 ## Step 2: Downsampling Reads Per Exon
 As some exons have more reads, and thus more power, than others, this function down-samples exons which have a number greater than or equal to the number of reads down-sampled by, and removes those which have less. 
