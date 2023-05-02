@@ -1,8 +1,7 @@
 #'Calling differential accessible peaks by comparing two conditions of one specific cell type ####################
 #'
 #'
-#' @param ATACobj the object with chromatin assay created.
-#' @param annotation.gr A set of GRanges containing annotations for the genome used, the default setting is NULL. If supplied, it will be used as input for CreateChromatinAssay.
+#' @param ATACobj_path the object with chromatin assay created.
 #' @param AssayName The assay names of the chromatin assay, default = "ATAC"
 #' @param condition.query  the condition in query.
 #' @param celltypeA the cell type A for comparison.
@@ -19,8 +18,8 @@
 #' @export
 #'
 
-DAPeaks_ByCelltype <- function(ATACobj, annotation.gr = NULL, AssayName = "ATAC", condition.query, celltypeA, celltypeB, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE) {
+DAPeaks_ByCelltype <- function(ATACobj_path, AssayName = "ATAC", condition.query, celltypeA, celltypeB, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, harmony = FALSE, outputDir, savePeakRobj = FALSE) {
   file6 <- system.file("R_scripts", "DAPeaks_ByCelltype.R", package = "scisorATAC")
-  string6 <- paste("Rscript", file6, ATACobj, annotation.gr, AssayName,condition.query,celltypeA,celltypeB,cellnum,peaknum,MinCellRatio,random.repeats,harmony, outputDir,savePeakRobj)
+  string6 <- paste("Rscript", file6, ATACobj_path, AssayName,condition.query,celltypeA,celltypeB,cellnum,peaknum,MinCellRatio,random.repeats,harmony, outputDir,savePeakRobj)
   system(string6)
 }
