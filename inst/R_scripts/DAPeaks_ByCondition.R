@@ -145,7 +145,7 @@ print(paste0(Sys.time()," Random subsampling V", k ," is done"))
 
    ### create a stats table
    stats.group.name <- c("celltype","condition.comparison","sig.peaks","tested.peaks","sig.peak.pct")
-   peaks.stats <- data.frame(matrix(0, nrow = random.repeats, ncol = length(stats.group.name)))
+   peaks.stats <- matrix(NA, nrow = as.numeric(random.repeats), ncol = 5)
    colnames(peaks.stats) <- stats.group.name
 
    for (i in 1:random.repeats)
