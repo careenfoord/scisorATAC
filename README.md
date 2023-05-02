@@ -195,9 +195,9 @@ Required input:
 
 ```{r conditionATAC, include = TRUE, eval = FALSE}
 DAPeaks_ByCondition(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",
-AssayName = "ATAC", celltype.query = c("ExN_CUX2_RORB"), conditionA = c(“VIS”),
-conditionB = “PFC”, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, 
-random.repeats = 10, outputDir = PathToOutputFiles, savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
+AssayName = "ATAC", celltype.query = "ExN_CUX2_RORB", conditionA = "VIS",
+conditionB = "PFC", cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, 
+random.repeats = 10, outputDir = "PathToOutputFiles", savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
 ```
 ** Each random.repeat will take approximately 20 minutes to complete. If testing this function we recommend starting with 1 or 2 **
 
@@ -221,9 +221,9 @@ Required input:
 
 ```{r ctATAC, include = TRUE, eval = FALSE}
 DAPeaks_ByCelltype(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",  AssayName = "ATAC", 
-condition.query = c("VIS"),  celltypeA = c(“ExN_CUX2_RORB”),  celltypeB = c("ExN_RORB"), 
+condition.query = "VIS",  celltypeA = "ExN_CUX2_RORB",  celltypeB = "ExN_RORB", 
 cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, 
-outputDir = PathToOutputFiles , savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
+outputDir = "PathToOutputFiles" , savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
 ```
 
 ## ATAC Outputs
