@@ -16,7 +16,7 @@ DAPeaks_ByCondition(
   random.repeats = 10,
   harmony = FALSE,
   outputDir,
-  savePeakRobj = FALSE
+  savePeakRobj = FALSE,
   MACS2_path
 )
 }
