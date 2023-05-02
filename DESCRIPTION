@@ -1,6 +1,6 @@
 Package: scisorATAC
 Title: Downsampling reads and exons from LR ONT Data
-Version: 0.0.0.9000
+Version: 0.0.1.0000
 Authors@R: 
     person("Careen", "Foord", ,"caf4010@med.cornell.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
