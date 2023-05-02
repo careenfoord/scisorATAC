@@ -1,7 +1,7 @@
 
 # Background
 
-The *scisorATAC* package allows you to down-sample reads and exons from long-read RNA and cells and peaks from ATAC data. RNA data should be processed through the *scisorseqr* pipeline and its generated *AllInfo.gz* files are used for input. ATAC data should be processed through *CellRanger* and *Signac*. This is a linux-based package which operates in R. This package is currently not operatable in Jupyter Notebooks
+The *scisorATAC* package allows you to down-sample reads and exons from long-read RNA and cells and peaks from ATAC data. RNA data should be processed through the *scisorseqr* pipeline and its generated *AllInfo.gz* files are used for input. ATAC data should be processed through *CellRanger* and *Signac*. This is a linux-based package which operates in R. This package currently does not operate in Jupyter Notebooks, and is recommended to be installed and used in an R conda evironment. Jupyter Notebook compatibility will be released in the near future.
 
 ## RNA Uses
   1.Compares exon inclusion and exclusion between 2 groups
