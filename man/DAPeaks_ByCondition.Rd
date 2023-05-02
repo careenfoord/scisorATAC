@@ -6,7 +6,6 @@
 \usage{
 DAPeaks_ByCondition(
   ATACobj,
-  annotation.gr = NULL,
   AssayName = "ATAC",
   celltype.query,
   conditionA,
@@ -18,12 +17,11 @@ DAPeaks_ByCondition(
   harmony = FALSE,
   outputDir,
   savePeakRobj = FALSE
+  MACS2_path
 )
 }
 \arguments{
-\item{ATACobj}{the object with chromatin assay created.}
-
-\item{annotation.gr}{A set of GRanges containing annotations for the genome used, the default setting is NULL. If supplied, it will be used as input for CreateChromatinAssay.}
+\item{ATACobj}{the path to the RDS file with chromatin assay created.}
 
 \item{AssayName}{The assay names of the chromatin assay, default = "ATAC"}
 
@@ -46,6 +44,8 @@ DAPeaks_ByCondition(
 \item{savePeakRobj}{The peaks called by MACS2 for each subsampling will be stored as assay ‘peaks’. It will be saved as Robj for downstream analysis, default = FALSE.}
 
 \item{celltype}{the cell type in query.}
+\item{MACS2_path}{path to macs2}
+}
 }
 \value{
 downsampled ATAC cells
