@@ -63,7 +63,8 @@ Seurat::DefaultAssay(ATACobj.rand) <- AssayName
 #### calling peaks with MACS2
 macs.peaks.rand <- Signac::CallPeaks(
   object = ATACobj.rand,
-  group.by = "condition"
+  group.by = "condition",
+  macs2.path = MACS2_path
 )
 
 macs.peaks.rand.chr <- GenomeInfoDb::keepStandardChromosomes(macs.peaks.rand, pruning.mode = "coarse")
