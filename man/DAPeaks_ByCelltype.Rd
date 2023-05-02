@@ -5,8 +5,7 @@
 \title{Calling differential accessible peaks by comparing two conditions of one specific cell type ####################}
 \usage{
 DAPeaks_ByCelltype(
-  ATACobj,
-  annotation.gr = NULL,
+  ATACobj_path,
   AssayName = "ATAC",
   condition.query,
   celltypeA,
@@ -17,13 +16,12 @@ DAPeaks_ByCelltype(
   random.repeats = 10,
   harmony = FALSE,
   outputDir,
-  savePeakRobj = FALSE
+  savePeakRobj = FALSE,
+  MACS2_path
 )
 }
 \arguments{
 \item{ATACobj}{the object with chromatin assay created.}
-
-\item{annotation.gr}{A set of GRanges containing annotations for the genome used, the default setting is NULL. If supplied, it will be used as input for CreateChromatinAssay.}
 
 \item{AssayName}{The assay names of the chromatin assay, default = "ATAC"}
 
@@ -46,6 +44,8 @@ DAPeaks_ByCelltype(
 \item{outputDir}{Directory path to the output filee, which will be created if not existed.}
 
 \item{savePeakRobj}{The peaks called by MACS2 for each subsampling will be stored as assay ‘peaks’. It will be saved as Robj for downstream analysis, default = FALSE.}
+ 
+\item{MACS2_path}{path to macs2}
 }
 \value{
 downsampled ATAC cells
