@@ -44,8 +44,8 @@ rowname.listB <- as.data.frame(rownames(ATACobj.B@meta.data))
 rm(ATACobj.A,ATACobj.B)
 
 ######if number of celltype A and celltype B exceed the random sampling size cellnum ######
- if (conditionA.total>cellnum & conditionB.total>cellnum)
- {
+# if (conditionA.total>cellnum & conditionB.total>cellnum)
+ #{
 
    for (k in 1:random.repeats)
    {
@@ -168,13 +168,13 @@ print(paste0(Sys.time()," Random subsampling V", k ," is done"))
 ##### print out the stats
 write.table(peaks.stats, file = paste0(outputDir,"/","Sig.Peak.Stats_",random.repeats,"random.subsampling_",celltype.query,"_",conditionA,".VS.",conditionB,".txt"), sep = "\t" ,col.names = TRUE, row.names = FALSE, quote = FALSE)
 
-}
+#}
 
 ####### if given subsampling size is larger than the cell number of either one of the query celltypes
-if (conditionA.total < cellnum | conditionB.total < cellnum)
-{
-  print("subsampling size is larger than total cell number")
-}
+#if (conditionA.total < cellnum | conditionB.total < cellnum)
+#{
+#  print("subsampling size is larger than total cell number")
+#}
 
 }
 
