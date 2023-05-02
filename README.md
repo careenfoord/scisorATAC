@@ -30,14 +30,14 @@ The *scisorATAC* package allows you to down-sample reads and exons from long-rea
 ### Software required for ATAC functions
 * MACS2
 * R >= 4.2 with the following installed:
-  * Signac
-  * Seurat
   * GenomeInfoDb
   * harmony
   * dplyr
   * tidyr
   * GenomicRanges
   * Rsamtools
+  * Signac
+  * Seurat
   
 
 ### Documentation Cheat Sheet
