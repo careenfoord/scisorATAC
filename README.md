@@ -28,6 +28,7 @@ The *scisorATAC* package allows you to down-sample reads and exons from long-rea
   * dplyr
   
 ### Software required for ATAC functions
+* MACS2
 * R >= 4.2 with the following installed:
   * Signac
   * Seurat
@@ -37,7 +38,7 @@ The *scisorATAC* package allows you to down-sample reads and exons from long-rea
   * tidyr
   * GenomicRanges
   * Rsamtools
-  * Macs2
+  
 
 ### Documentation Cheat Sheet
 Each function's proper usage and inputs can be viewed interactively by putting a "?" in front of the function name like so:
@@ -52,7 +53,6 @@ Each function's proper usage and inputs can be viewed interactively by putting a
 ```{r removeseed, include = TRUE, eval = FALSE}
 rm(.Random.seed, envir=globalenv())
 ```
-* when inputting function variables, place them in the order specified below.
 
 ### Installation
 Package can be installed with devtools
@@ -100,12 +100,13 @@ other flexible inputs:
 
 ```{r casesVcontrols, include = TRUE, eval = FALSE}
 casesVcontrols(caseList = "complete_path_to_caseList", controlList = "complete_path_to_controlList", 
-               chrom_file = "Refs/all",numThreads = 10, 
-               annotation_path = "path_to_anno", 
+               chrom_file = "Refs/all.chroms.20.X ",numThreads = 24, 
+               annotation_path = "Refs/Macaca_mulatta.Mmul_10.101_gencodeFormat.gtf.gz", 
                ci_low = 0.05, ci_upper = 0.95, min_reads = 10, 
                zipping_function = "zcat", OL_fraction = 0.8, 
-               CellTypeFile = "path_to_CelltypeFile", OutputDir="OutputDir")
+               CellTypeFile = "Refs/CellTypeFile", OutputDir="OutputDir")
 ```
+
 
 ## Step 2: Downsampling Reads Per Exon
 As some exons have more reads, and thus more power, than others, this function down-samples exons which have a number greater than or equal to the number of reads down-sampled by, and removes those which have less. 
@@ -117,7 +118,6 @@ Required Input:
 - Num_Downsampled_Reads: Number of reads you wish to down-sample to.
 - example: to replicate example data. Automatically set value if not specified = FALSE. 
 
-To see an example output for Macaque PFC chr22 V. Macaque VIS chr22 run:
 ```{r downsampleReads, include = TRUE, eval = FALSE}
 downsampleReads(Num_Downsampled_Reads = 10, example = TRUE)
 ```
@@ -130,6 +130,7 @@ Output:
 
 - CorrelationPlot.pdf: plot of correlation of orginial DPSI and downsampled DPSI
 
+
 ## Step 3: Downsampling Exons to calculate % Exons Significant and Iterating
 Down-samples number exons and then repeats to generate a distribution of significant events.
 
@@ -140,7 +141,6 @@ Required Input:
 - Num_Exons_Selected: Number of exons you wish to down-sample and calculate % exons significant.
 - Num_Repeats: Number of iterations. Recommended at least 50 but will vary by data set.  
 
-To see an example output for Macaque PFC chr22 V. Macaque VIS chr22 run:
 ```{r downsampleExons, include = TRUE, eval = FALSE}
 downsampleExonsAndIterate(Num_Exons_Selected = 10, Num_Repeats = 100, example = TRUE)
 ```
@@ -155,7 +155,7 @@ ViolinPlot()
 ```
 Output: Downsampling_ViolinPlot.pdf
 
-** Following the example dataset, all % Exons significant are 0.
+** Following the example dataset, all % Exons significant are 0. **
 
 # ATAC Analysis
 ATAC functionallity gives you the option to compare downsampled data between 2 cell types, or of the same cell type in different conditions.
@@ -197,9 +197,9 @@ Required input:
 DAPeaks_ByCondition(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",
 AssayName = "ATAC", celltype.query = c("ExN_CUX2_RORB"), conditionA = c(“VIS”),
 conditionB = “PFC”, cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, 
-random.repeats = 10, outputDir = PathToOutputFiles, savePeakRobj = FALSE)
+random.repeats = 10, outputDir = PathToOutputFiles, savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
 ```
-* Each random.repeat will take approximately 20 minutes to complete. If testing this function we recommend starting with 1 or 2 *
+** Each random.repeat will take approximately 20 minutes to complete. If testing this function we recommend starting with 1 or 2 **
 
 ## Cell Type Specific ATAC Comparison
 Calling differential accessible peaks by comparing two conditions of one specific cell type. 
@@ -223,7 +223,7 @@ Required input:
 DAPeaks_ByCelltype(ATACobj_path = "OutputDir/combined.7K.ATAC.RDS",  AssayName = "ATAC", 
 condition.query = c("VIS"),  celltypeA = c(“ExN_CUX2_RORB”),  celltypeB = c("ExN_RORB"), 
 cellnum = 500, peaknum = 5000, MinCellRatio = 0.02, random.repeats = 10, 
-outputDir = PathToOutputFiles , savePeakRobj = FALSE)
+outputDir = PathToOutputFiles , savePeakRobj = FALSE, MACS2_path="path_to_MACS2")
 ```
 
 ## ATAC Outputs
