@@ -55,8 +55,19 @@ rm(.Random.seed, envir=globalenv())
 ```
 
 ### Installation
-Package can be installed with devtools
+Package can be installed with devtools in a conda environment
+
+Example conda setup:
+```{bash conda, include = TRUE, eval = FALSE}
+conda create --name scisorATAC r-base=4.2 r-devtools
+conda activate scisorATAC
+conda install -c conda-forge python=2.7
+```
+Example R setup:
 ```{r install devtools, include = TRUE, eval = FALSE}
+install.packages(c("dplyr","tidyr","ggplot2","magrittr"))
+BiocManager::install(c("GenomeInfoDb","GenomicRanges","Rsamtools"))
+install.packages(c("Seurat",'Signac',"harmony","rstatix"))
 devtools::install_github("careenfoord/scisorATAC")
 library(scisorATAC)
 ```
