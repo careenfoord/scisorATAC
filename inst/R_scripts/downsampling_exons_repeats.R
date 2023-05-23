@@ -71,7 +71,7 @@ downsampling_exons_repeats <- function(Num_Exons_Selected,Num_Repeats){
 
         table_sampled$Pval <- pval
         num_sig_trial <- dim(table_sampled[table_sampled$Pval <=BF,])[1]
-        percent_sig_trial <- (num_sig_trial/Num_Repeats)*100
+        percent_sig_trial <- (num_sig_trial/Num_Exons_Selected)*100
 
         percent_sig <- append(percent_sig, percent_sig_trial)
       }
