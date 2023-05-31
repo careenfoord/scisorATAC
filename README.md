@@ -80,8 +80,9 @@ R CMD build scisorATAC/
 R CMD INSTALL scisorATAC_0.0.0.9000.tar.gz
 ```
 
-### Example Dataset
-Example datasets are available to use by running the command below after installation
+### Example Dataset and script downloads
+This function should be run before doing any analysis, as it downloads several scripts and also example datasets.
+
 ```{r example data, include = TRUE, eval = FALSE}
 DownloadRefs()
 ```
