@@ -78,7 +78,7 @@ macs2.counts.ATACobj.rand <- Signac::FeatureMatrix(
 
 
 ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
-  counts = macs2.counts.ATACobj.rand,
+  counts = macs2.counts.ATACobj.rand
 )
 
 
