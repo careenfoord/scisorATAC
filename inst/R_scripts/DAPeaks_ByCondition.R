@@ -76,6 +76,11 @@ macs2.counts.ATACobj.rand <- Signac::FeatureMatrix(
   cells = colnames(ATACobj.rand)
 )
 
+peak.assay <- Signac::CreateChromatinAssay(counts = macs2.counts.ATACobj.rand,annotation = annotation.hg38)
+
+    Dimnames <- peak.assay@data@Dimnames
+    peak.cells <- Dimnames[[2]]
+    ATACobj.rand <- subset(ATACobj.rand, cells = peak.cells)
 
 ATACobj.rand[["peaks"]] <- Signac::CreateChromatinAssay(
   counts = macs2.counts.ATACobj.rand
@@ -95,11 +100,14 @@ ATACobj.rand <- harmony::RunHarmony(
 }
 
 ######## save signac obj ##################3
+Seurat::DefaultAssay(ATACobj.rand) <- “peaks”
+
 if (savePeakRobj == TRUE)
 {
   save(ATACobj.rand, file = paste0(outputDir,"/",rand.version[k],"_",celltype.query,"_",conditionA,".VS.",conditionB,"_Signac.Robj"))
 }
 #### export annotation information of all subsampled peaks ####
+Seurat::DefaultAssay(ATACobj.rand) <- “peaks”
 rand.gr <- Signac::granges(ATACobj.rand)
 #### save granges file
 save(rand.gr,file = paste0(outputDir,"/",rand.version[k],"_",celltype.query,"_",conditionA,".VS.",conditionB,"_all.peaks.granges.Robj"))
