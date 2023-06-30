@@ -99,9 +99,13 @@ ATACobj.rand <- harmony::RunHarmony(
 )
 }
 
-######## save signac obj ##################3
-Seurat::DefaultAssay(ATACobj.rand) <- “peaks”
+##### Normalization and linear dimensional reduction #####
+Seurat::DefaultAssay(ATACobj.rand) <- "peaks"
+ATACobj.rand <- Signac::FindTopFeatures(ATACobj.rand, min.cutoff = 5)
+ATACobj.rand <- Signac::RunTFIDF(ATACobj.rand)
+ATACobj.rand <- Signac::RunSVD(ATACobj.rand)
 
+######## save signac obj ##################
 if (savePeakRobj == TRUE)
 {
   save(ATACobj.rand, file = paste0(outputDir,"/",rand.version[k],"_",celltype.query,"_",conditionA,".VS.",conditionB,"_Signac.Robj"))
