@@ -76,7 +76,7 @@ macs2.counts.ATACobj.rand <- Signac::FeatureMatrix(
   cells = colnames(ATACobj.rand)
 )
 
-peak.assay <- Signac::CreateChromatinAssay(counts = macs2.counts.ATACobj.rand,annotation = annotation.hg38)
+peak.assay <- Signac::CreateChromatinAssay(counts = macs2.counts.ATACobj.rand)
 
     Dimnames <- peak.assay@data@Dimnames
     peak.cells <- Dimnames[[2]]
